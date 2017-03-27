@@ -57,14 +57,14 @@ while(True):
             ser.write(str(xcenter))
         elif msg == 'y':
             ser.write(str(ycenter))
+        elif msg == 's':
+            ser.write(str(xcenter) + ' ' + str(ycenter))
         else:
             print 'msg = ', msg
 
     cv2.imshow('frame',frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
-        cv2.imwrite('shemdetected.jpg',frame)
         break
-
 
 # When everything done, release the capture
 cap.release()
