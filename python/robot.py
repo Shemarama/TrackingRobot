@@ -41,8 +41,8 @@ while(True):
       ycenter = (y+h)/2
       cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
       # to detect eyes
-      roi_gray = gray[y:y+h, x:x+w]
-      roi_color = frame[y:y+h, x:x+w]
+      #roi_gray = gray[y:y+h, x:x+w]
+      #roi_color = frame[y:y+h, x:x+w]
       
       #print 'Face %d = x: %d y: %d' % (key,xcenter,ycenter)
 

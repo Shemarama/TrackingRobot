@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/barbie/Documents/python/opencv/robot/c++/main.cpp
+opencv2/objdetect/objdetect.hpp
+/home/barbie/Documents/python/opencv/robot/c++/opencv2/objdetect/objdetect.hpp
+opencv2/highgui/highgui.hpp
+/home/barbie/Documents/python/opencv/robot/c++/opencv2/highgui/highgui.hpp
+opencv2/imgproc/imgproc.hpp
+/home/barbie/Documents/python/opencv/robot/c++/opencv2/imgproc/imgproc.hpp
+iostream
+-
+stdio.h
+-
+
