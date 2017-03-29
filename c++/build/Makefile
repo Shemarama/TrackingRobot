@@ -123,32 +123,126 @@ Robot/fast:
 	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/build
 .PHONY : Robot/fast
 
-main.o: main.cpp.o
+#=============================================================================
+# Target rules for targets named serial
 
-.PHONY : main.o
+# Build rule for target.
+serial: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 serial
+.PHONY : serial
+
+# fast build rule for target.
+serial/fast:
+	$(MAKE) -f CMakeFiles/serial.dir/build.make CMakeFiles/serial.dir/build
+.PHONY : serial/fast
+
+objectDetection2.o: objectDetection2.cpp.o
+
+.PHONY : objectDetection2.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/main.cpp.o
-.PHONY : main.cpp.o
+objectDetection2.cpp.o:
+	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/objectDetection2.cpp.o
+.PHONY : objectDetection2.cpp.o
 
-main.i: main.cpp.i
+objectDetection2.i: objectDetection2.cpp.i
 
-.PHONY : main.i
+.PHONY : objectDetection2.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/main.cpp.i
-.PHONY : main.cpp.i
+objectDetection2.cpp.i:
+	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/objectDetection2.cpp.i
+.PHONY : objectDetection2.cpp.i
 
-main.s: main.cpp.s
+objectDetection2.s: objectDetection2.cpp.s
 
-.PHONY : main.s
+.PHONY : objectDetection2.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/main.cpp.s
-.PHONY : main.cpp.s
+objectDetection2.cpp.s:
+	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/objectDetection2.cpp.s
+.PHONY : objectDetection2.cpp.s
+
+src/impl/list_ports/list_ports_linux.o: src/impl/list_ports/list_ports_linux.cc.o
+
+.PHONY : src/impl/list_ports/list_ports_linux.o
+
+# target to build an object file
+src/impl/list_ports/list_ports_linux.cc.o:
+	$(MAKE) -f CMakeFiles/serial.dir/build.make CMakeFiles/serial.dir/src/impl/list_ports/list_ports_linux.cc.o
+.PHONY : src/impl/list_ports/list_ports_linux.cc.o
+
+src/impl/list_ports/list_ports_linux.i: src/impl/list_ports/list_ports_linux.cc.i
+
+.PHONY : src/impl/list_ports/list_ports_linux.i
+
+# target to preprocess a source file
+src/impl/list_ports/list_ports_linux.cc.i:
+	$(MAKE) -f CMakeFiles/serial.dir/build.make CMakeFiles/serial.dir/src/impl/list_ports/list_ports_linux.cc.i
+.PHONY : src/impl/list_ports/list_ports_linux.cc.i
+
+src/impl/list_ports/list_ports_linux.s: src/impl/list_ports/list_ports_linux.cc.s
+
+.PHONY : src/impl/list_ports/list_ports_linux.s
+
+# target to generate assembly for a file
+src/impl/list_ports/list_ports_linux.cc.s:
+	$(MAKE) -f CMakeFiles/serial.dir/build.make CMakeFiles/serial.dir/src/impl/list_ports/list_ports_linux.cc.s
+.PHONY : src/impl/list_ports/list_ports_linux.cc.s
+
+src/impl/unix.o: src/impl/unix.cc.o
+
+.PHONY : src/impl/unix.o
+
+# target to build an object file
+src/impl/unix.cc.o:
+	$(MAKE) -f CMakeFiles/serial.dir/build.make CMakeFiles/serial.dir/src/impl/unix.cc.o
+.PHONY : src/impl/unix.cc.o
+
+src/impl/unix.i: src/impl/unix.cc.i
+
+.PHONY : src/impl/unix.i
+
+# target to preprocess a source file
+src/impl/unix.cc.i:
+	$(MAKE) -f CMakeFiles/serial.dir/build.make CMakeFiles/serial.dir/src/impl/unix.cc.i
+.PHONY : src/impl/unix.cc.i
+
+src/impl/unix.s: src/impl/unix.cc.s
+
+.PHONY : src/impl/unix.s
+
+# target to generate assembly for a file
+src/impl/unix.cc.s:
+	$(MAKE) -f CMakeFiles/serial.dir/build.make CMakeFiles/serial.dir/src/impl/unix.cc.s
+.PHONY : src/impl/unix.cc.s
+
+src/serial.o: src/serial.cc.o
+
+.PHONY : src/serial.o
+
+# target to build an object file
+src/serial.cc.o:
+	$(MAKE) -f CMakeFiles/serial.dir/build.make CMakeFiles/serial.dir/src/serial.cc.o
+.PHONY : src/serial.cc.o
+
+src/serial.i: src/serial.cc.i
+
+.PHONY : src/serial.i
+
+# target to preprocess a source file
+src/serial.cc.i:
+	$(MAKE) -f CMakeFiles/serial.dir/build.make CMakeFiles/serial.dir/src/serial.cc.i
+.PHONY : src/serial.cc.i
+
+src/serial.s: src/serial.cc.s
+
+.PHONY : src/serial.s
+
+# target to generate assembly for a file
+src/serial.cc.s:
+	$(MAKE) -f CMakeFiles/serial.dir/build.make CMakeFiles/serial.dir/src/serial.cc.s
+.PHONY : src/serial.cc.s
 
 # Help Target
 help:
@@ -159,9 +253,19 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Robot"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... serial"
+	@echo "... objectDetection2.o"
+	@echo "... objectDetection2.i"
+	@echo "... objectDetection2.s"
+	@echo "... src/impl/list_ports/list_ports_linux.o"
+	@echo "... src/impl/list_ports/list_ports_linux.i"
+	@echo "... src/impl/list_ports/list_ports_linux.s"
+	@echo "... src/impl/unix.o"
+	@echo "... src/impl/unix.i"
+	@echo "... src/impl/unix.s"
+	@echo "... src/serial.o"
+	@echo "... src/serial.i"
+	@echo "... src/serial.s"
 .PHONY : help
 
 

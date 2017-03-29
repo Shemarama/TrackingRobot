@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/Robot.dir/main.cpp.o"
+  "CMakeFiles/Robot.dir/objectDetection2.cpp.o"
   "Robot.pdb"
   "Robot"
 )

@@ -1,3 +1,4 @@
 /home/barbie/Documents/python/opencv/robot/c++/build/CMakeFiles/edit_cache.dir
 /home/barbie/Documents/python/opencv/robot/c++/build/CMakeFiles/rebuild_cache.dir
 /home/barbie/Documents/python/opencv/robot/c++/build/CMakeFiles/Robot.dir
+/home/barbie/Documents/python/opencv/robot/c++/build/CMakeFiles/serial.dir

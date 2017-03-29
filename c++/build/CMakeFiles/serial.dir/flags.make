@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/barbie/Documents/python/opencv/robot/c++/include -isystem /usr/include/opencv 
+CXX_INCLUDES = -I/home/barbie/Documents/python/opencv/robot/c++/include 
 

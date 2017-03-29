@@ -6,13 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/barbie/Documents/python/opencv/robot/c++/main.cpp
-opencv2/objdetect/objdetect.hpp
-/home/barbie/Documents/python/opencv/robot/c++/opencv2/objdetect/objdetect.hpp
-opencv2/highgui/highgui.hpp
-/home/barbie/Documents/python/opencv/robot/c++/opencv2/highgui/highgui.hpp
-opencv2/imgproc/imgproc.hpp
-/home/barbie/Documents/python/opencv/robot/c++/opencv2/imgproc/imgproc.hpp
+/home/barbie/Documents/python/opencv/robot/c++/objectDetection2.cpp
+opencv2/objdetect.hpp
+/home/barbie/Documents/python/opencv/robot/c++/opencv2/objdetect.hpp
+opencv2/videoio.hpp
+/home/barbie/Documents/python/opencv/robot/c++/opencv2/videoio.hpp
+opencv2/highgui.hpp
+/home/barbie/Documents/python/opencv/robot/c++/opencv2/highgui.hpp
+opencv2/imgproc.hpp
+/home/barbie/Documents/python/opencv/robot/c++/opencv2/imgproc.hpp
 iostream
 -
 stdio.h
