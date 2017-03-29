@@ -54,6 +54,20 @@ using std::cerr;
 using std::endl;
 using std::vector;
 
+/** Global variables */
+String face_cascade_name = "/home/barbie/Documents/python/opencv/opencv/data/lbpcascades/lbpcascade_frontalface_improved.xml";
+String eyes_cascade_name = "/home/barbie/Documents/python/opencv/opencv/data/haarcascades/haarcascade_eye_tree_eyeglasses.xml";
+CascadeClassifier face_cascade;
+CascadeClassifier eyes_cascade;
+String window_name = "Capture - Face detection";
+
+unsigned char LSB = 0;
+unsigned char MSB = 0;
+short MSBLSB = 0;
+
+/** Function Headers */
+void detectAndDisplay( Mat frame );
+
 void my_sleep(unsigned long milliseconds) {
 #ifdef _WIN32
      Sleep(milliseconds); // 100 ms
@@ -64,7 +78,7 @@ void my_sleep(unsigned long milliseconds) {
 
 void print_usage()
 {
- cerr << "Usage: test_serial {-e|<serial port address>} ";
+   cerr << "Usage: test_serial {-e|<serial port address>} ";
    cerr << "<baudrate> [test string]" << endl;
 }
 
@@ -81,21 +95,6 @@ int setup(int argc, char **argv)
  }
   return 0;
 }
-
-
-/** Function Headers */
-void detectAndDisplay( Mat frame );
-
-/** Global variables */
-String face_cascade_name = "/home/barbie/Documents/python/opencv/opencv/data/lbpcascades/lbpcascade_frontalface_improved.xml";
-String eyes_cascade_name = "/home/barbie/Documents/python/opencv/opencv/data/haarcascades/haarcascade_eye_tree_eyeglasses.xml";
-CascadeClassifier face_cascade;
-CascadeClassifier eyes_cascade;
-String window_name = "Capture - Face detection";
-
-unsigned char LSB = 0;
-unsigned char MSB = 0;
-short MSBLSB = 0;
 
 
 /**
@@ -166,15 +165,15 @@ int main(int argc, char **argv)
 
         for( size_t i = 0; i < faces.size(); i++ )
         {
-            LSB = faces[i].x & 0xff;
-            MSB = (faces[i].x >> 8) & 0xff;
+            LSB = (faces[i].x+faces[i].width/2) & 0xff;
+            MSB = ((faces[i].x+faces[i].width/2) >> 8) & 0xff;
             arduino.write(MSB+"");
             arduino.write(LSB+"");
-            LSB = faces[i].y & 0xff;
-            MSB = (faces[i].y >> 8) & 0xff;
+            LSB = (faces[i].y+faces[i].height/2) & 0xff;
+            MSB = ((faces[i].y+faces[i].height/2) >> 8) & 0xff;
             arduino.write(MSB+"");
             arduino.write(LSB+"");
-
+            
             Mat faceROI = frame_gray( faces[i] );
             std::vector<Rect> eyes;
 
