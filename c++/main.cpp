@@ -82,39 +82,6 @@ int setup(int argc, char **argv)
   return 0;
 }
 
-serial::Serial openPort(int argc, char **argv)
-{
- // Argument 1 is the serial port or enumerate flag
- string port(argv[1]);
-
- // Argument 2 is the baudrate
- unsigned long baud = 0;
-#if defined(WIN32) && !defined(__MINGW32__)
- sscanf_s(argv[2], "%lu", &baud);
-#else
- sscanf(argv[2], "%lu", &baud);
-#endif
-
- // port, baudrate, timeout in milliseconds
- serial::Serial my_serial(port, baud, serial::Timeout::simpleTimeout(1000));
-
- cout << "Is the serial port open?";
- if(my_serial.isOpen())
-   cout << " Yes." << endl;
- else
-   cout << " No." << endl;
-
- // Get the Test string
- int count = 0;
- string test_string;
- if (argc == 4) {
-   test_string = argv[3];
- } else {
-   test_string = "Testing.";
- }
-
- return my_serial;
-}
 
 /** Function Headers */
 void detectAndDisplay( Mat frame );
@@ -125,6 +92,12 @@ String eyes_cascade_name = "/home/barbie/Documents/python/opencv/opencv/data/haa
 CascadeClassifier face_cascade;
 CascadeClassifier eyes_cascade;
 String window_name = "Capture - Face detection";
+
+unsigned char LSB = 0;
+unsigned char MSB = 0;
+short MSBLSB = 0;
+
+
 /**
  * @function main
  */
@@ -132,7 +105,35 @@ int main(int argc, char **argv)
 {
     if (setup(argc,argv) == 1)
         return 0;
-    serial::Serial arduino = openPort(argc,argv);
+    // Argument 1 is the serial port or enumerate flag
+    string port(argv[1]);
+
+    // Argument 2 is the baudrate
+    unsigned long baud = 0;
+#if defined(WIN32) && !defined(__MINGW32__)
+    sscanf_s(argv[2], "%lu", &baud);
+#else
+    sscanf(argv[2], "%lu", &baud);
+#endif
+
+    // port, baudrate, timeout in milliseconds
+    serial::Serial arduino(port, baud, serial::Timeout::simpleTimeout(1000));
+
+    cout << "Is the serial port open?";
+    if(arduino.isOpen())
+      cout << " Yes." << endl;
+    else
+      cout << " No." << endl;
+
+    // Get the Test string
+    int count = 0;
+    string test_string;
+    if (argc == 4) {
+      test_string = argv[3];
+    } else {
+      test_string = "Testing.";
+    }
+
     
     VideoCapture capture;
     Mat frame;
@@ -154,7 +155,48 @@ int main(int argc, char **argv)
         }
 
         //-- 3. Apply the classifier to the frame
-        detectAndDisplay( frame );
+        std::vector<Rect> faces;
+        Mat frame_gray;
+
+        cvtColor( frame, frame_gray, COLOR_BGR2GRAY );
+        equalizeHist( frame_gray, frame_gray );
+
+        //-- Detect faces
+        face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0, Size(80, 80) );
+
+        for( size_t i = 0; i < faces.size(); i++ )
+        {
+            LSB = faces[i].x & 0xff;
+            MSB = (faces[i].x >> 8) & 0xff;
+            arduino.write(MSB+"");
+            arduino.write(LSB+"");
+            LSB = faces[i].y & 0xff;
+            MSB = (faces[i].y >> 8) & 0xff;
+            arduino.write(MSB+"");
+            arduino.write(LSB+"");
+
+            Mat faceROI = frame_gray( faces[i] );
+            std::vector<Rect> eyes;
+
+            //-- In each face, detect eyes
+            eyes_cascade.detectMultiScale( faceROI, eyes, 1.1, 2, 0 |CASCADE_SCALE_IMAGE, Size(30, 30) );
+            if( eyes.size() == 2)
+            {
+                //-- Draw the face
+                Point center( faces[i].x + faces[i].width/2, faces[i].y + faces[i].height/2 );
+                ellipse( frame, center, Size( faces[i].width/2, faces[i].height/2 ), 0, 0, 360, Scalar( 255, 0, 0 ), 2, 8, 0 );
+
+                for( size_t j = 0; j < eyes.size(); j++ )
+                { //-- Draw the eyes
+                    Point eye_center( faces[i].x + eyes[j].x + eyes[j].width/2, faces[i].y + eyes[j].y + eyes[j].height/2 );
+                    int radius = cvRound( (eyes[j].width + eyes[j].height)*0.25 );
+                    circle( frame, eye_center, radius, Scalar( 255, 0, 255 ), 3, 8, 0 );
+                }
+            }
+
+        }
+        //-- Show what you got
+        imshow( window_name, frame );
 
         //-- bail out if escape was pressed
         char c = (char)waitKey(10);
@@ -163,54 +205,3 @@ int main(int argc, char **argv)
     return 0;
 }
 
-/**
- * @function detectAndDisplay
- */
-void detectAndDisplay( Mat frame )
-{
-    std::vector<Rect> faces;
-    Mat frame_gray;
-
-    cvtColor( frame, frame_gray, COLOR_BGR2GRAY );
-    equalizeHist( frame_gray, frame_gray );
-
-    //-- Detect faces
-    face_cascade.detectMultiScale( frame_gray, faces, 1.1, 2, 0, Size(80, 80) );
-
-    for( size_t i = 0; i < faces.size(); i++ )
-    {
-        unsigned char LSB = 0;
-        unsigned char MSB = 0;
-        short MSBLSB = 0;
-        LSB = faces[i].x & 0xff;
-        MSB = (faces[i].x >> 8) & 0xff;
-        arduino.write(MSB);
-        arduino.write(LSB);
-        LSB = faces[i].y & 0xff;
-        MSB = (faces[i].y >> 8) & 0xff;
-        arduino.write(MSB);
-        arduino.write(LSB);
-
-        Mat faceROI = frame_gray( faces[i] );
-        std::vector<Rect> eyes;
-
-        //-- In each face, detect eyes
-        eyes_cascade.detectMultiScale( faceROI, eyes, 1.1, 2, 0 |CASCADE_SCALE_IMAGE, Size(30, 30) );
-        if( eyes.size() == 2)
-        {
-            //-- Draw the face
-            Point center( faces[i].x + faces[i].width/2, faces[i].y + faces[i].height/2 );
-            ellipse( frame, center, Size( faces[i].width/2, faces[i].height/2 ), 0, 0, 360, Scalar( 255, 0, 0 ), 2, 8, 0 );
-
-            for( size_t j = 0; j < eyes.size(); j++ )
-            { //-- Draw the eyes
-                Point eye_center( faces[i].x + eyes[j].x + eyes[j].width/2, faces[i].y + eyes[j].y + eyes[j].height/2 );
-                int radius = cvRound( (eyes[j].width + eyes[j].height)*0.25 );
-                circle( frame, eye_center, radius, Scalar( 255, 0, 255 ), 3, 8, 0 );
-            }
-        }
-
-    }
-    //-- Show what you got
-    imshow( window_name, frame );
-}
