@@ -136,32 +136,32 @@ serial/fast:
 	$(MAKE) -f CMakeFiles/serial.dir/build.make CMakeFiles/serial.dir/build
 .PHONY : serial/fast
 
-objectDetection2.o: objectDetection2.cpp.o
+main.o: main.cpp.o
 
-.PHONY : objectDetection2.o
+.PHONY : main.o
 
 # target to build an object file
-objectDetection2.cpp.o:
-	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/objectDetection2.cpp.o
-.PHONY : objectDetection2.cpp.o
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/main.cpp.o
+.PHONY : main.cpp.o
 
-objectDetection2.i: objectDetection2.cpp.i
+main.i: main.cpp.i
 
-.PHONY : objectDetection2.i
+.PHONY : main.i
 
 # target to preprocess a source file
-objectDetection2.cpp.i:
-	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/objectDetection2.cpp.i
-.PHONY : objectDetection2.cpp.i
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-objectDetection2.s: objectDetection2.cpp.s
+main.s: main.cpp.s
 
-.PHONY : objectDetection2.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-objectDetection2.cpp.s:
-	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/objectDetection2.cpp.s
-.PHONY : objectDetection2.cpp.s
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 src/impl/list_ports/list_ports_linux.o: src/impl/list_ports/list_ports_linux.cc.o
 
@@ -254,9 +254,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Robot"
 	@echo "... serial"
-	@echo "... objectDetection2.o"
-	@echo "... objectDetection2.i"
-	@echo "... objectDetection2.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... src/impl/list_ports/list_ports_linux.o"
 	@echo "... src/impl/list_ports/list_ports_linux.i"
 	@echo "... src/impl/list_ports/list_ports_linux.s"

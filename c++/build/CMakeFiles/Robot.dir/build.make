@@ -57,38 +57,38 @@ include CMakeFiles/Robot.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Robot.dir/flags.make
 
-CMakeFiles/Robot.dir/objectDetection2.cpp.o: CMakeFiles/Robot.dir/flags.make
-CMakeFiles/Robot.dir/objectDetection2.cpp.o: ../objectDetection2.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/barbie/Documents/python/opencv/robot/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Robot.dir/objectDetection2.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Robot.dir/objectDetection2.cpp.o -c /home/barbie/Documents/python/opencv/robot/c++/objectDetection2.cpp
+CMakeFiles/Robot.dir/main.cpp.o: CMakeFiles/Robot.dir/flags.make
+CMakeFiles/Robot.dir/main.cpp.o: ../main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/barbie/Documents/python/opencv/robot/c++/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Robot.dir/main.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Robot.dir/main.cpp.o -c /home/barbie/Documents/python/opencv/robot/c++/main.cpp
 
-CMakeFiles/Robot.dir/objectDetection2.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Robot.dir/objectDetection2.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/barbie/Documents/python/opencv/robot/c++/objectDetection2.cpp > CMakeFiles/Robot.dir/objectDetection2.cpp.i
+CMakeFiles/Robot.dir/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Robot.dir/main.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/barbie/Documents/python/opencv/robot/c++/main.cpp > CMakeFiles/Robot.dir/main.cpp.i
 
-CMakeFiles/Robot.dir/objectDetection2.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Robot.dir/objectDetection2.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/barbie/Documents/python/opencv/robot/c++/objectDetection2.cpp -o CMakeFiles/Robot.dir/objectDetection2.cpp.s
+CMakeFiles/Robot.dir/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Robot.dir/main.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/barbie/Documents/python/opencv/robot/c++/main.cpp -o CMakeFiles/Robot.dir/main.cpp.s
 
-CMakeFiles/Robot.dir/objectDetection2.cpp.o.requires:
+CMakeFiles/Robot.dir/main.cpp.o.requires:
 
-.PHONY : CMakeFiles/Robot.dir/objectDetection2.cpp.o.requires
+.PHONY : CMakeFiles/Robot.dir/main.cpp.o.requires
 
-CMakeFiles/Robot.dir/objectDetection2.cpp.o.provides: CMakeFiles/Robot.dir/objectDetection2.cpp.o.requires
-	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/objectDetection2.cpp.o.provides.build
-.PHONY : CMakeFiles/Robot.dir/objectDetection2.cpp.o.provides
+CMakeFiles/Robot.dir/main.cpp.o.provides: CMakeFiles/Robot.dir/main.cpp.o.requires
+	$(MAKE) -f CMakeFiles/Robot.dir/build.make CMakeFiles/Robot.dir/main.cpp.o.provides.build
+.PHONY : CMakeFiles/Robot.dir/main.cpp.o.provides
 
-CMakeFiles/Robot.dir/objectDetection2.cpp.o.provides.build: CMakeFiles/Robot.dir/objectDetection2.cpp.o
+CMakeFiles/Robot.dir/main.cpp.o.provides.build: CMakeFiles/Robot.dir/main.cpp.o
 
 
 # Object files for target Robot
 Robot_OBJECTS = \
-"CMakeFiles/Robot.dir/objectDetection2.cpp.o"
+"CMakeFiles/Robot.dir/main.cpp.o"
 
 # External object files for target Robot
 Robot_EXTERNAL_OBJECTS =
 
-Robot: CMakeFiles/Robot.dir/objectDetection2.cpp.o
+Robot: CMakeFiles/Robot.dir/main.cpp.o
 Robot: CMakeFiles/Robot.dir/build.make
 Robot: libserial.a
 Robot: /usr/lib/libopencv_stitching.so.3.2.0
@@ -143,7 +143,7 @@ CMakeFiles/Robot.dir/build: Robot
 
 .PHONY : CMakeFiles/Robot.dir/build
 
-CMakeFiles/Robot.dir/requires: CMakeFiles/Robot.dir/objectDetection2.cpp.o.requires
+CMakeFiles/Robot.dir/requires: CMakeFiles/Robot.dir/main.cpp.o.requires
 
 .PHONY : CMakeFiles/Robot.dir/requires
 

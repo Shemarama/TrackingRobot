@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/barbie/Documents/python/opencv/robot/c++/objectDetection2.cpp" "/home/barbie/Documents/python/opencv/robot/c++/build/CMakeFiles/Robot.dir/objectDetection2.cpp.o"
+  "/home/barbie/Documents/python/opencv/robot/c++/main.cpp" "/home/barbie/Documents/python/opencv/robot/c++/build/CMakeFiles/Robot.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

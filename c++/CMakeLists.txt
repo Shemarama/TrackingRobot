@@ -20,6 +20,6 @@ if(UNIX AND NOT APPLE)
 endif()
 
 ## Build your executable
-add_executable( Robot objectDetection2.cpp )
+add_executable( Robot main.cpp )
 ## Link your executable against the library
 target_link_libraries(Robot serial ${OpenCV_LIBS} )
