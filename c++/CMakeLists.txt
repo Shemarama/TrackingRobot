@@ -19,6 +19,8 @@ if(UNIX AND NOT APPLE)
     target_link_libraries(serial rt)
 endif()
 
+set(CMAKE_CXX_FLAGS "-std=c++11")
+
 ## Build your executable
 add_executable( Robot main.cpp )
 ## Link your executable against the library
