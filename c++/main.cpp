@@ -41,6 +41,8 @@ String window_name = "Capture - Face detection";
 
 unsigned int x;
 unsigned int y;
+unsigned int centerx;
+unsigned int centery;
 
 auto start = std::chrono::steady_clock::now();
 auto finish = std::chrono::steady_clock::now();
@@ -140,12 +142,15 @@ int main(int argc, char** argv)
     equalizeHist(frame_gray, frame_gray);
 
     //-- Detect faces
-    face_cascade.detectMultiScale(frame_gray, faces, 1.1, 2, 0, Size(80, 80));
+    //face_cascade.detectMultiScale(frame_gray, faces, 1.1, 2, 0, Size(80, 80));
+    face_cascade.detectMultiScale(frame_gray, faces, 1.3, 3, 0, Size(80, 80));
 
     for (size_t i = 0; i < faces.size(); i++) {
       // get xy coord for face
       x = faces[i].x;
       y = faces[i].y;
+      centerx = faces[i].x + int(faces[i].width/2);
+      centery = faces[i].y + int(faces[i].height/2);
 
       //-- Draw the face
       Point center(faces[i].x + faces[i].width / 2,
@@ -163,12 +168,14 @@ int main(int argc, char** argv)
     if (elapsed_seconds > 0.2) {
       // if not garbage xy coord
       if ((x > 0) && (x < 640) && (y > 0) && (y < 480)) {
-        cout << "x: " << x;
-        arduino.write(std::to_string(x));
+        cout << "x: " << centerx;
+        //arduino.write(std::to_string(x));
+        arduino.write(std::to_string(centerx));
         arduino.write("\n");
         
-        cout << "   y: " << y << endl;
-        arduino.write(std::to_string(y));
+        cout << "   y: " << centery << endl;
+        //arduino.write(std::to_string(y));
+        arduino.write(std::to_string(centery));
         arduino.write("\n");
       }
       start = std::chrono::steady_clock::now();

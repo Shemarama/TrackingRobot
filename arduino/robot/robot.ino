@@ -80,7 +80,7 @@ void loop () {
     }
     servoy.write(90);
 
-    if ( (220 < valx) && (valx < 250) && (120 < valy) && (valy < 160) ) {
+    if ( (290 < valx) && (valx < 350) && (210 < valy) && (valy < 270) ) {
       digitalWrite(LED, HIGH);
       delay(5);
     }
