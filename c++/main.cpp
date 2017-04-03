@@ -142,7 +142,6 @@ int main(int argc, char** argv)
     equalizeHist(frame_gray, frame_gray);
 
     //-- Detect faces
-    //face_cascade.detectMultiScale(frame_gray, faces, 1.1, 2, 0, Size(80, 80));
     face_cascade.detectMultiScale(frame_gray, faces, 1.3, 3, 0, Size(80, 80));
 
     for (size_t i = 0; i < faces.size(); i++) {
@@ -153,8 +152,8 @@ int main(int argc, char** argv)
       centery = faces[i].y + int(faces[i].height/2);
 
       //-- Draw the face
-      Point center(faces[i].x + faces[i].width / 2,
-                   faces[i].y + faces[i].height / 2);
+      //Point center(faces[i].x + faces[i].width / 2,
+      //             faces[i].y + faces[i].height / 2);
       rectangle(frame,
                 Rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height),
                 Scalar(255, 0, 0), 2, 8, 0);
@@ -169,12 +168,10 @@ int main(int argc, char** argv)
       // if not garbage xy coord
       if ((x > 0) && (x < 640) && (y > 0) && (y < 480)) {
         cout << "x: " << centerx;
-        //arduino.write(std::to_string(x));
         arduino.write(std::to_string(centerx));
         arduino.write("\n");
         
         cout << "   y: " << centery << endl;
-        //arduino.write(std::to_string(y));
         arduino.write(std::to_string(centery));
         arduino.write("\n");
       }
