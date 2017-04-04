@@ -44,6 +44,8 @@ unsigned int y;
 unsigned int centerx;
 unsigned int centery;
 
+bool faceDetected = false;
+
 auto start = std::chrono::steady_clock::now();
 auto finish = std::chrono::steady_clock::now();
 double elapsed_seconds =
@@ -140,7 +142,12 @@ int main(int argc, char** argv)
     equalizeHist(frame_gray, frame_gray);
 
     //-- Detect faces
-    face_cascade.detectMultiScale(frame_gray, faces, 1.3, 3, 0, Size(80, 80));
+    face_cascade.detectMultiScale(frame_gray, faces, 1.4, 3, 0, Size(80, 80));
+
+    if (faces.size() == 0)
+      faceDetected = false;
+    else
+      faceDetected = true;
 
     for (size_t i = 0; i < faces.size(); i++) {
       // get xy coord for face
@@ -160,7 +167,7 @@ int main(int argc, char** argv)
       std::chrono::duration_cast<std::chrono::duration<double>>(finish - start).count();
 
     // send xy coord every 200 ms
-    if (elapsed_seconds > 0.2) {
+    if (elapsed_seconds > 0.2 && faceDetected) {
       // if not garbage xy coord
       if ((x > 0) && (x < 640) && (y > 0) && (y < 480)) {
         cout << "x: " << centerx;

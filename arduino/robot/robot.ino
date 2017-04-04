@@ -16,8 +16,8 @@
 
 int valx = 0;       // store x data from serial port
 int valy = 0;       // store y data from serial port
-int posx = 0;
-int posy = 0;
+int posx = 76;
+int posy = 90;
 int incx = 10;  // significant increments of horizontal (x) camera movement
 int incy = 10;  // significant increments of vertical (y) camera movement
 
@@ -37,6 +37,9 @@ void setup() {
 
   servoy.attach(servopiny); 
   servox.attach(servopinx); 
+  delay(100);
+  servox.write(posx);
+  delay(2000);
 }
 
 void loop () {
@@ -60,16 +63,17 @@ void loop () {
     }
     
     
-    if (valx < 220) {
-      servox.write(180);
+    if ( (posx < (180-4)) && (valx < 290) ) {
+      posx += 3;
+      servox.write(posx);
       delay(10);
     }
-    else if (valx > 250) {
-      servox.write(0);
+    else if ( (posx > (0+4)) && (valx > 350) ) {
+      posx -= 3;
+      servox.write(posx);
       delay(10);
     }
-    servox.write(90);
-
+    /*
     if (valy < 120) {
       servoy.write(180);
       delay(10);
@@ -77,8 +81,7 @@ void loop () {
     else if (valy > 160) {
       servoy.write(0);
       delay(10);
-    }
-    servoy.write(90);
+    }*/
 
     if ( (290 < valx) && (valx < 350) && (210 < valy) && (valy < 270) ) {
       digitalWrite(LED, HIGH);
