@@ -117,7 +117,7 @@ int main(int argc, char** argv)
   };
   
   //-- 2. Read the video stream
-  capture.open(-1);
+  capture.open(1);
   if (!capture.isOpened()) {
     printf("--(!)Error opening video capture\n");
     return -1;
@@ -135,8 +135,6 @@ int main(int argc, char** argv)
     }
 
     //-- 3. Apply the classifier to the frame
-    //std::vector<Rect> faces;
-    //Mat frame_gray;
 
     cvtColor(frame, frame_gray, COLOR_BGR2GRAY);
     equalizeHist(frame_gray, frame_gray);
@@ -152,8 +150,6 @@ int main(int argc, char** argv)
       centery = faces[i].y + int(faces[i].height/2);
 
       //-- Draw the face
-      //Point center(faces[i].x + faces[i].width / 2,
-      //             faces[i].y + faces[i].height / 2);
       rectangle(frame,
                 Rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height),
                 Scalar(255, 0, 0), 2, 8, 0);
