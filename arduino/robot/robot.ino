@@ -11,15 +11,19 @@
 #define  baudrate 57600  // com port speed. Must match your C++ setting
 #define distancex 1  // x servo rotation steps
 #define distancey 1  // y servo rotation steps
-#define  screencenterx 210 // x coord of screen center
-#define  screencentery 320 // y coord of screen center
+#define  screencenterx 320 // x coord of screen center
+#define  screencentery 240 // y coord of screen center
 
 int valx = 0;       // store x data from serial port
 int valy = 0;       // store y data from serial port
-int posx = 76;
-int posy = 90;
+int posx = 74;
+int posy = 30;
 int incx = 10;  // significant increments of horizontal (x) camera movement
 int incy = 10;  // significant increments of vertical (y) camera movement
+int dx = 0;
+int dy = 0;
+int scalex = 15;
+int scaley = 22;
 
 Servo servox;
 Servo servoy;
@@ -39,6 +43,7 @@ void setup() {
   servox.attach(servopinx); 
   delay(100);
   servox.write(posx);
+  servoy.write(posy);
   delay(2000);
 }
 
@@ -63,34 +68,47 @@ void loop () {
     }
     
     
-    if ( (posx < (180-4)) && (valx < 290) ) {
-      posx += 3;
+    if ( (posx < (180)) && (valx < 290) ) {
+      dx = int((screencenterx-valx)/scalex);
+      posx += dx;
+      if (posx > 180)
+        posx = 180;
       servox.write(posx);
       delay(10);
     }
-    else if ( (posx > (0+4)) && (valx > 350) ) {
-      posx -= 3;
+    else if ( (posx > (0)) && (valx > 350) ) {
+      dx = int((screencenterx-valx)/scalex);
+      posx += dx;
+      if (posx < 0)
+        posx = 0;
       servox.write(posx);
       delay(10);
     }
-    /*
-    if (valy < 120) {
-      servoy.write(180);
-      delay(10);
-    }
-    else if (valy > 160) {
-      servoy.write(0);
-      delay(10);
-    }*/
 
-    if ( (290 < valx) && (valx < 350) && (210 < valy) && (valy < 270) ) {
+    if ( (posy < (180)) && (valy < 210) ) {
+      dy = int((screencenterx-valy)/scaley);
+      posy += dy;
+      if (posy > 180)
+        posy = 180;
+      servoy.write(posy);
+      delay(10);
+    }
+    else if ( (posy > (0)) && (valy > 270) ) {
+      dy = int((screencentery-valy)/scaley);
+      posy += dy;
+      if (posy < 0)
+        posy = 0;
+      servoy.write(posy);
+      delay(10);
+    }
+
+    
+
+    if ( (290 < valx) && (valx < 350) && (210 < valy) && (valy < 270) )
       digitalWrite(LED, HIGH);
-      delay(5);
-    }
-    else {
+    else
       digitalWrite(LED, LOW);
-      delay(5);
-    }
+    delay(5);
   }
 }
 

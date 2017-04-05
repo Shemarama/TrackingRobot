@@ -166,8 +166,8 @@ int main(int argc, char** argv)
     elapsed_seconds =
       std::chrono::duration_cast<std::chrono::duration<double>>(finish - start).count();
 
-    // send xy coord every 200 ms
-    if (elapsed_seconds > 0.2 && faceDetected) {
+    // send xy coord every 100 ms
+    if (elapsed_seconds > 0.1 && faceDetected) {
       // if not garbage xy coord
       if ((x > 0) && (x < 640) && (y > 0) && (y < 480)) {
         cout << "x: " << centerx;
