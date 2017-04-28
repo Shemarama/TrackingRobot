@@ -25,6 +25,15 @@ int dy = 0;
 int scalex = 15;
 int scaley = 22;
 
+unsigned long startTime = 0;
+unsigned long endTime = 0;
+unsigned long scanXStart = 0;
+unsigned long scanXEnd = 0;
+unsigned long scanYStart = 0;
+unsigned long scanYEnd = 0;
+int scanX = 1;
+int scanY = 1;
+
 Servo servox;
 Servo servoy;
 
@@ -48,9 +57,60 @@ void setup() {
 }
 
 void loop () {
-  while(Serial.available() <=0); // wait for incoming serial data
+  startTime = millis();
+  while(Serial.available() <= 7)
+  {
+     // wait for incoming serial data
+     endTime = millis();
+     if ( (endTime-startTime) >= 2000)
+     {
+        // SCAN MODE if no detected faces
+        scanXStart = millis();
+        scanYStart = millis();
+        while(Serial.available() <= 7)
+        {
+          scanXEnd = millis();
+          scanYEnd = millis();
+          if ( (scanXEnd-scanXStart) >= 20)
+          {
+            if (posx <= 0)
+            {
+              posx = 1;
+              scanX *= -1;
+            }
+            if (posx >= 180)
+            {
+              posx = 179;
+              scanX *= -1;
+            }
+            posx += scanX;
+            servox.write(posx);
+            scanXStart = millis();
+          }
+
+          if ( (scanYEnd-scanYStart) >= 50)
+          {
+            if (posy <= 30)
+            {
+              posy = 31;
+              scanY *= -1;
+            }
+            if (posy >= 50)
+            {
+              posy = 49;
+              scanY *= -1;
+            }
+            posy += scanY;
+            servoy.write(posy);
+            scanYStart = millis();
+          }
+        }
+     }
+  }
+  // FACE DETECTED
   if (Serial.available() >= 8)  // wait for 4 bytes. 
   {
+    // GET X COORD
     valx = 0;
     while(true) {
       incomingByte = Serial.read();
@@ -59,6 +119,7 @@ void loop () {
       valx = ((incomingByte-'0')+valx);
     }
 
+    // GET Y COORD
     valy = 0;
     while(true) {
       incomingByte = Serial.read();
@@ -67,7 +128,7 @@ void loop () {
       valy = ((incomingByte-'0')+valy);
     }
     
-    
+    // ADJUST CAMERA X POSITION IF FACE NOT CENTERED
     if ( (posx < (180)) && (valx < 290) ) {
       dx = int((screencenterx-valx)/scalex);
       posx += dx;
@@ -85,6 +146,7 @@ void loop () {
       delay(10);
     }
 
+    // ADJUST CAMERA Y POSITION IF FACE NOT CENTERED
     if ( (posy < (180)) && (valy < 210) ) {
       dy = int((screencenterx-valy)/scaley);
       posy += dy;
@@ -103,7 +165,7 @@ void loop () {
     }
 
     
-
+    // turn on LED if camera is centered
     if ( (290 < valx) && (valx < 350) && (210 < valy) && (valy < 270) )
       digitalWrite(LED, HIGH);
     else
